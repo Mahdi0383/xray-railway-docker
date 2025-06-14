@@ -1,18 +1,35 @@
 {
-  "log": { "loglevel": "warning" },
+  "log": {
+    "loglevel": "warning"
+  },
   "inbounds": [
     {
       "port": 10000,
       "protocol": "vless",
       "settings": {
-        "clients": [{ "id": "${AUUID}", "level": 0 }],
-        "decryption": "none"
+        "clients": [
+          {
+            "id": "${AUUID}",
+            "level": 0,
+            "email": "user@domain.com"
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": []
       },
       "streamSettings": {
         "network": "ws",
-        "wsSettings": { "path": "/ray" }
+        "security": "none",
+        "wsSettings": {
+          "path": "/ray"
+        }
       }
     }
   ],
-  "outbounds": [{ "protocol": "freedom" }]
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
