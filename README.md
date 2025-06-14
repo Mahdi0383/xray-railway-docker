@@ -1,14 +1,21 @@
 # Xray + Caddy for Railway
 
-This project deploys Xray + Caddy on Railway. 
+این پروژه برای دیپلوی آسان Xray (VLESS + WebSocket) با Caddy (TLS خودکار) روی Railway هست.
 
-## ENV Variables
+## تنظیمات
 
-- `AUUID` — (Optional) Your UUID
-- `PORT` — (Optional) Web service port
+- **AUUID**: (اختیاری) اگر UUID خاصی می‌خوای، قبل از دیپلوی تعریفش کن.
+- **PORT**: (اختیاری) پورت داخلی Caddy، پیش‌فرض 8080.
 
-## Deploy
+## Deploy در Railway
 
-Click this to deploy:
+1. ریپو رو Fork کن یا خودت Push کن.
+2. در Railway، New Project → Deploy from GitHub.
+3. در قسمت Variables:
+   - `AUUID`: UUID یا بذارش خالی باشه خودش می‌سازه
+   - `PORT`: 8080
+4. Deploy رو بزن.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template-link)
+## لینک VLESS
+
+اگر دامنه‌ات مثلاً `myapp.up.railway.app` باشه، لینک:
