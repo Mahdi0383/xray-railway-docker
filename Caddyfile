@@ -2,5 +2,10 @@
 root * /usr/share/caddy
 file_server
 
-@proxy path /ray
-reverse_proxy @proxy localhost:10000
+route /ray* {
+  reverse_proxy localhost:10000 {
+    transport http {
+      versions h2c 1.1
+    }
+  }
+}
