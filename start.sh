@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-# اجرای سرویس‌ها
-tor &
+# اجرای cloudflared tunnel
+cloudflared tunnel run --config /etc/cloudflared/config.yml &
 
 # اجرای xray
 /usr/local/bin/xray -config /etc/xray/config.json &
 
-# اجرای caddy برای وب‌سایت تقلبی یا دایرکتوری استاتیک
+# اجرای caddy
 caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
