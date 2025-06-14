@@ -1,20 +1,25 @@
 #!/bin/bash
 set -e
 
-# خواندن UUID و Port از متغیرهای محیطی یا مقدار پیش‌فرض
 AUUID=${AUUID:-"$(uuidgen)"}
-export AUUID
 PORT=${PORT:-8080}
+export AUUID
 
-echo "UUID: $AUUID, PORT: $PORT"
-
+# ساخت فایل ساده برای Caddy
 mkdir -p /usr/share/caddy
+cat <<EOF > /usr/share/caddy/index.html
+<h1>Xray + Caddy Tunnel is Running</h1>
+EOF
 
-echo "<h1>Xray + Caddy is running</h1>" > /usr/share/caddy/index.html
-
-# جایگذاری UUID در فایل xray.json
+# جایگذاری متغیرها در فایل‌ها
 envsubst < /xray.json > /tmp/xray.json && mv /tmp/xray.json /xray.json
+envsubst < /Caddyfile > /tmp/Caddyfile && mv /tmp/Caddyfile /etc/caddy/Caddyfile
 
 # اجرای Xray و Caddy
 /usr/local/bin/xray -config /xray.json &
-caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+caddy run --config /etc/caddy/Caddyfile --adapter caddyfile &
+
+# اجرای cloudflared tunnel
+echo "$TUNNEL_TOKEN" | cloudflared tunnel run --no-autoupdate --token - &
+
+wait -n
