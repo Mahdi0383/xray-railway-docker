@@ -1,21 +1,20 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
-# Configs
-AUUID=${AUUID:-$(uuidgen)}
+# خواندن UUID و Port از متغیرهای محیطی یا مقدار پیش‌فرض
+AUUID=${AUUID:-"$(uuidgen)"}
+export AUUID
 PORT=${PORT:-8080}
 
-echo "Generated UUID: $AUUID"
+echo "UUID: $AUUID, PORT: $PORT"
 
-mkdir -p /etc/caddy /usr/share/caddy
+mkdir -p /usr/share/caddy
 
-# Basic HTML index
-echo "<h1>Xray + Caddy running</h1>" > /usr/share/caddy/index.html
+echo "<h1>Xray + Caddy is running</h1>" > /usr/share/caddy/index.html
 
-# Replace UUID in config files
+# جایگذاری UUID در فایل xray.json
 envsubst < /xray.json > /tmp/xray.json && mv /tmp/xray.json /xray.json
-envsubst < /Caddyfile > /tmp/Caddyfile && mv /tmp/Caddyfile /etc/caddy/Caddyfile
 
-# Start services
-tor &
-xray -config /xray.json &
+# اجرای Xray و Caddy
+/usr/local/bin/xray -config /xray.json &
 caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
