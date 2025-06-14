@@ -1,5 +1,5 @@
-tunnel: 4cd063a8-8707-4960-8003-2bba5a4d9ae6
-credentials-file: /etc/cloudflared/4cd063a8-8707-4960-8003-2bba5a4d9ae6.json
+tunnel: 86426b29-852e-41ee-bfbd-5496da7c2770
+credentials-file: /etc/cloudflared/86426b29-852e-41ee-bfbd-5496da7c2770.json
 
 ingress:
   - hostname: mg83.xyz
