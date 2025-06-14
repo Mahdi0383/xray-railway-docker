@@ -1,29 +1,17 @@
 FROM debian:bullseye-slim
 
-# نصب وابستگی‌ها
-RUN apt update && \
-    apt install -y curl unzip xz-utils wget gnupg ca-certificates supervisor caddy && \
-    mkdir -p /etc/xray /var/log/xray /usr/local/bin /etc/cloudflared && \
-    rm -rf /var/lib/apt/lists/*
+# نصب ابزارهای ضروری
+RUN apt update && apt install -y curl unzip wget ca-certificates supervisor
 
-# نصب Xray
+# دانلود Xray
+RUN mkdir -p /etc/xray /usr/local/bin
 RUN wget -O /tmp/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip && \
     unzip /tmp/xray.zip -d /usr/local/bin && \
-    chmod +x /usr/local/bin/xray && \
-    rm -rf /tmp/xray.zip
+    chmod +x /usr/local/bin/xray
 
-# نصب cloudflared
-RUN wget -O /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && \
-    chmod +x /usr/local/bin/cloudflared
-
+# کپی فایل‌ها
 COPY config.json /etc/xray/config.json
-COPY start.sh /start.sh
-COPY cloudflared /etc/cloudflared
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-RUN chmod +x /start.sh
-
-EXPOSE 80
-EXPOSE 443
-
-CMD ["/start.sh"]
+CMD ["/entrypoint.sh"]
