@@ -1,9 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "Starting cloudflared tunnel..."
-cloudflared tunnel --config /etc/cloudflared/config.yml run &
+# ایجاد فایل config با مقدار UUID سفارشی اگر env تنظیم شده باشد
+if [ -n "$UUID" ]; then
+  sed -i "s/UUID_REPLACE/$UUID/g" /etc/xray/config.json
+else
+  export UUID=$(xray uuid)
+  sed -i "s/UUID_REPLACE/$UUID/g" /etc/xray/config.json
+fi
 
-sleep 5
+echo "✅ UUID: $UUID"
+echo "✅ Starting Xray..."
 
-echo "Starting xray..."
-xray -c /etc/xray/config.json
+exec xray run -c /etc/xray/config.json
