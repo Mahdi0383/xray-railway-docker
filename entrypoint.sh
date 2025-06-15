@@ -1,5 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-# Start Xray
-echo "Starting Xray..."
-/usr/bin/xray -config /etc/xray/config.json
+echo "Starting cloudflared tunnel..."
+cloudflared tunnel --config /etc/cloudflared/config.yml run &
+
+sleep 5
+
+echo "Starting xray..."
+xray -c /etc/xray/config.json
