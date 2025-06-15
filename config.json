@@ -4,20 +4,20 @@
   },
   "inbounds": [
     {
-      "port": 8080,
+      "port": 80,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "b2f8f1b0-2ac6-4fd4-bfa2-7e85f79f92f0",
-            "level": 0
+            "id": "UUID_REPLACE",
+            "level": 0,
+            "email": "user@xray.com"
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
-        "security": "none",
         "wsSettings": {
           "path": "/ws"
         }
@@ -26,7 +26,8 @@
   ],
   "outbounds": [
     {
-      "protocol": "freedom"
+      "protocol": "freedom",
+      "settings": {}
     }
   ]
 }
