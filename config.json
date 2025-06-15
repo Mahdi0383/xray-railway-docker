@@ -9,25 +9,24 @@
       "settings": {
         "clients": [
           {
-            "id": "86426b29-852e-41ee-bfbd-5496da7c2770",
-            "level": 0,
-            "email": "user@domain.com"
+            "id": "b2f8f1b0-2ac6-4fd4-bfa2-7e85f79f92f0",
+            "level": 0
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/"
+          "path": "/ws"
         }
       }
     }
   ],
   "outbounds": [
     {
-      "protocol": "freedom",
-      "settings": {}
+      "protocol": "freedom"
     }
   ]
 }
