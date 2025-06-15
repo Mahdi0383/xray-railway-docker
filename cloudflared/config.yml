@@ -1,7 +1,0 @@
-tunnel: 86426b29-852e-41ee-bfbd-5496da7c2770
-credentials-file: /home/your-user/.cloudflared/86426b29-852e-41ee-bfbd-5496da7c2770.json
-
-ingress:
-  - hostname: mg83.xyz
-    service: http://xray-railway-docker-production.up.railway.app
-  - service: http_status:404
