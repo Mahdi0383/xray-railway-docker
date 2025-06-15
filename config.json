@@ -1,13 +1,17 @@
 {
+  "log": {
+    "loglevel": "warning"
+  },
   "inbounds": [
     {
-      "port": 8080,
+      "port": 80,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "2a345b8e-a932-4af2-8ac8-8577365c7dca",
-            "flow": "xtls-rprx-vision"
+            "id": "86426b29-852e-41ee-bfbd-5496da7c2770",
+            "level": 0,
+            "email": "user@domain.com"
           }
         ],
         "decryption": "none"
@@ -22,7 +26,8 @@
   ],
   "outbounds": [
     {
-      "protocol": "freedom"
+      "protocol": "freedom",
+      "settings": {}
     }
   ]
 }
