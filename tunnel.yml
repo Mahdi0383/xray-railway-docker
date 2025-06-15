@@ -1,0 +1,7 @@
+tunnel: 86426b29-852e-41ee-bfbd-5496da7c2770
+credentials-file: /etc/cloudflared/86426b29-852e-41ee-bfbd-5496da7c2770.json
+
+ingress:
+  - hostname: mg83.xyz
+    service: http://localhost:8080
+  - service: http_status:404
